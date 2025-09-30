@@ -1,0 +1,36 @@
+node_modules/
+client/web/node_modules/
+
+# Ignore node_modules anywhere
+**/node_modules/
+
+# Frontend build artifacts
+client/web/dist/
+client/web/dist-ssr/
+client/web/*.local
+
+# OS/editor cruft
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Python / FastAPI
+venv/
+**/__pycache__/
+**/*.pyc
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Environment files
+.env
+server/.env
+
+# Coverage / reports
+htmlcov/
+.coverage*
+coverage.xml
+
+# Logs
+*.log
