@@ -1,7 +1,7 @@
 from functools import lru_cache
 from pydantic_settings import BaseSettings
 from pydantic import AnyUrl, Field
-from typing import List
+from typing import List, Optional
 import os
 
 
@@ -31,10 +31,18 @@ class Settings(BaseSettings):
     # Optional services
     REDIS_URL: str | None = None
     STRIPE_API_KEY: str | None = None
+    MAIL_USERNAME: Optional[str] = None
+    MAIL_PASSWORD: Optional[str] = None
+    MAIL_FROM: Optional[str] = None
 
     class Config:
-        # Look for .env at repository root (server/.env)
-        env_file = os.path.join(os.path.dirname(os.path.dirname(__file__)), ".env")
+        # Look for .env at project root (four levels up from this file)
+        env_file = os.path.join(
+            os.path.dirname(
+                os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+            ),
+            ".env",
+        )
         env_file_encoding = "utf-8"
         case_sensitive = True
 
