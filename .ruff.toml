@@ -1,0 +1,45 @@
+# Ruff configuration
+# Docs: https://docs.astral.sh/ruff/configuration/
+
+line-length = 100
+indent-width = 4
+target-version = "py310"
+
+# Enable rule sets
+# E,F: pycodestyle + pyflakes
+# I: isort (import sorting)
+# B: flake8-bugbear
+# UP: pyupgrade
+# C4: flake8-comprehensions
+select = [
+    "E",
+    "F",
+    "I",
+    "B",
+    "UP",
+    "C4",
+]
+
+# Ignore rules
+# - F401: imported but unused (commonly in __init__.py for package exports)
+# - E203/E266/W503: whitespace/line-break rules clashing with common formatters
+ignore = [
+    "F401",
+    "E203",
+    "E266",
+    "W503",
+]
+
+# Exclude generated or external code
+exclude = [
+    ".git",
+    "venv",
+    "__pycache__",
+    "client/",
+    "server/alembic/versions/",
+]
+
+[format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
