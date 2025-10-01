@@ -1,7 +1,7 @@
 from datetime import datetime, timedelta, timezone
 from typing import Any, Optional
 
-from jose import jwt, JWTError
+from jose import JWTError, jwt
 from passlib.context import CryptContext
 
 from .config import settings
@@ -19,7 +19,7 @@ def verify_password(plain_password: str, hashed_password: str) -> bool:
     return pwd_context.verify(plain_password, hashed_password)
 
 
-def create_access_token(subject: str | Any, expires_minutes: Optional[int] = None) -> str:
+def create_access_token(subject: str | Any, expires_minutes: int | None = None) -> str:
     if expires_minutes is None:
         expires_minutes = settings.ACCESS_TOKEN_EXPIRE_MINUTES
     expire = datetime.now(timezone.utc) + timedelta(minutes=expires_minutes)

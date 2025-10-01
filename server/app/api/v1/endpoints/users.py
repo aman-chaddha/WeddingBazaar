@@ -1,10 +1,10 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
-from ....deps import get_current_user
 from ....db.session import get_db
-from ....schemas.user import UserOut
+from ....deps import get_current_user
 from ....models.user import User
+from ....schemas.user import UserOut
 
 router = APIRouter()
 

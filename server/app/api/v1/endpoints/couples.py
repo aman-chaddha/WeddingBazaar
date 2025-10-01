@@ -1,12 +1,13 @@
-from fastapi import APIRouter, Depends, HTTPException
-from sqlalchemy.orm import Session
 from uuid import UUID
 
-from ....deps import get_current_user
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.orm import Session
+
 from ....db.session import get_db
-from ....schemas.couple import CoupleOut, CoupleUpdate
-from ....models.user import User
+from ....deps import get_current_user
 from ....models.couple import Couple
+from ....models.user import User
+from ....schemas.couple import CoupleOut, CoupleUpdate
 
 router = APIRouter()
 

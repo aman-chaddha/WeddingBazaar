@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from .core.config import settings
 from .api.v1.api import api_router
+from .core.config import settings
 from .db import base as model_base
 from .db.session import engine
 

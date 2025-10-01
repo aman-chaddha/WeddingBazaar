@@ -1,5 +1,6 @@
 import uuid
-from sqlalchemy import Column, String, ForeignKey
+
+from sqlalchemy import Column, ForeignKey, String
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 
@@ -14,7 +15,8 @@ class VendorStatusUpdate(Base, TimestampMixin):
     vendor_id = Column(UUID(as_uuid=True), ForeignKey("vendors.id"), nullable=False)
 
     message = Column(String, nullable=True)
-    status = Column(String, nullable=True)  # en_route, setup_in_progress, setup_complete, service_delivered
+    # status values: en_route, setup_in_progress, setup_complete, service_delivered
+    status = Column(String, nullable=True)
 
     event = relationship("Event", backref="status_updates")
     vendor = relationship("Vendor")

@@ -1,14 +1,14 @@
-from functools import lru_cache
-from pydantic_settings import BaseSettings
-from pydantic import AnyUrl, Field
-from typing import List, Optional
 import os
+from functools import lru_cache
+
+from pydantic import AnyUrl, Field
+from pydantic_settings import BaseSettings
 
 
 class Settings(BaseSettings):
     APP_NAME: str = "WeddingBazaar API"
     API_V1_PREFIX: str = "/api/v1"
-    CORS_ALLOW_ORIGINS: List[str] = [
+    CORS_ALLOW_ORIGINS: list[str] = [
         "http://localhost:5173",
         "http://127.0.0.1:5173",
         "http://localhost:3000",
@@ -31,9 +31,9 @@ class Settings(BaseSettings):
     # Optional services
     REDIS_URL: str | None = None
     STRIPE_API_KEY: str | None = None
-    MAIL_USERNAME: Optional[str] = None
-    MAIL_PASSWORD: Optional[str] = None
-    MAIL_FROM: Optional[str] = None
+    MAIL_USERNAME: str | None = None
+    MAIL_PASSWORD: str | None = None
+    MAIL_FROM: str | None = None
 
     class Config:
         # Look for .env at project root (four levels up from this file)
@@ -47,7 +47,7 @@ class Settings(BaseSettings):
         case_sensitive = True
 
 
-@lru_cache()
+@lru_cache
 def get_settings() -> "Settings":
     return Settings()
 

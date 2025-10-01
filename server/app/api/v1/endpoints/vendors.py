@@ -1,11 +1,11 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from ....deps import get_current_user
 from ....db.session import get_db
-from ....schemas.vendor import VendorOut, VendorUpdate
+from ....deps import get_current_user
 from ....models.user import User
 from ....models.vendor import Vendor
+from ....schemas.vendor import VendorOut, VendorUpdate
 
 router = APIRouter()
 

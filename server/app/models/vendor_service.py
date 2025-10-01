@@ -1,5 +1,6 @@
 import uuid
-from sqlalchemy import Column, String, ForeignKey, Numeric, JSON
+
+from sqlalchemy import JSON, Column, ForeignKey, Numeric, String
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 

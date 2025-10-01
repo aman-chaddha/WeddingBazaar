@@ -1,12 +1,13 @@
 from typing import Optional
-from pydantic import BaseModel
 from uuid import UUID
+
+from pydantic import BaseModel
 
 
 class VendorBase(BaseModel):
     business_name: str
-    description: Optional[str] = None
-    city: Optional[str] = None
+    description: str | None = None
+    city: str | None = None
 
 
 class VendorCreate(VendorBase):
@@ -14,16 +15,16 @@ class VendorCreate(VendorBase):
 
 
 class VendorUpdate(BaseModel):
-    business_name: Optional[str] = None
-    description: Optional[str] = None
-    city: Optional[str] = None
+    business_name: str | None = None
+    description: str | None = None
+    city: str | None = None
 
 
 class VendorOut(VendorBase):
     id: UUID
     user_id: UUID
-    rating_avg: Optional[float] = None
-    review_count: Optional[int] = None
+    rating_avg: float | None = None
+    review_count: int | None = None
     verified: bool = False
 
     class Config:

@@ -1,12 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
-from ....deps import get_current_user
 from ....db.session import get_db
-from ....schemas.package import PackageCreate, PackageOut
-from ....models.user import User
+from ....deps import get_current_user
 from ....models.couple import Couple
 from ....models.package import Package
+from ....models.user import User
+from ....schemas.package import PackageCreate, PackageOut
 
 router = APIRouter()
 
@@ -36,5 +36,10 @@ def list_packages(
     couple = db.query(Couple).filter(Couple.user_id == current_user.id).first()
     if not couple:
         raise HTTPException(status_code=404, detail="Couple profile not found")
-    pkgs = db.query(Package).filter(Package.couple_id == couple.id).order_by(Package.created_at.desc()).all()
+    pkgs = (
+        db.query(Package)
+        .filter(Package.couple_id == couple.id)
+        .order_by(Package.created_at.desc())
+        .all()
+    )
     return pkgs

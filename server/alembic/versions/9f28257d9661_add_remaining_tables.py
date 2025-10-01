@@ -5,17 +5,17 @@ Revises: 733ea45c5a03
 Create Date: 2025-10-01 10:10:05.181872
 
 """
-from typing import Sequence, Union
+from collections.abc import Sequence
+from typing import Union
 
-from alembic import op
 import sqlalchemy as sa
-
+from alembic import op
 
 # revision identifiers, used by Alembic.
 revision: str = '9f28257d9661'
-down_revision: Union[str, Sequence[str], None] = '733ea45c5a03'
-branch_labels: Union[str, Sequence[str], None] = None
-depends_on: Union[str, Sequence[str], None] = None
+down_revision: str | Sequence[str] | None = '733ea45c5a03'
+branch_labels: str | Sequence[str] | None = None
+depends_on: str | Sequence[str] | None = None
 
 
 def upgrade() -> None:
@@ -27,8 +27,18 @@ def upgrade() -> None:
     sa.Column('user_id', sa.UUID(), nullable=False),
     sa.Column('relation', sa.String(), nullable=True),
     sa.Column('permissions', sa.JSON(), nullable=True),
-    sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
-    sa.Column('updated_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
+    sa.Column(
+        'created_at',
+        sa.DateTime(timezone=True),
+        server_default=sa.text('now()'),
+        nullable=False,
+    ),
+    sa.Column(
+        'updated_at',
+        sa.DateTime(timezone=True),
+        server_default=sa.text('now()'),
+        nullable=False,
+    ),
     sa.ForeignKeyConstraint(['couple_id'], ['couples.id'], ),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -40,8 +50,18 @@ def upgrade() -> None:
     sa.Column('phone', sa.String(), nullable=True),
     sa.Column('email', sa.String(), nullable=True),
     sa.Column('group', sa.String(), nullable=True),
-    sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
-    sa.Column('updated_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
+    sa.Column(
+        'created_at',
+        sa.DateTime(timezone=True),
+        server_default=sa.text('now()'),
+        nullable=False,
+    ),
+    sa.Column(
+        'updated_at',
+        sa.DateTime(timezone=True),
+        server_default=sa.text('now()'),
+        nullable=False,
+    ),
     sa.ForeignKeyConstraint(['couple_id'], ['couples.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -52,8 +72,18 @@ def upgrade() -> None:
     sa.Column('check_in', sa.Date(), nullable=True),
     sa.Column('check_out', sa.Date(), nullable=True),
     sa.Column('transport_required', sa.Boolean(), nullable=True),
-    sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
-    sa.Column('updated_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
+    sa.Column(
+        'created_at',
+        sa.DateTime(timezone=True),
+        server_default=sa.text('now()'),
+        nullable=False,
+    ),
+    sa.Column(
+        'updated_at',
+        sa.DateTime(timezone=True),
+        server_default=sa.text('now()'),
+        nullable=False,
+    ),
     sa.ForeignKeyConstraint(['guest_id'], ['guests.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -63,8 +93,18 @@ def upgrade() -> None:
     sa.Column('url', sa.String(), nullable=False),
     sa.Column('media_type', sa.String(), nullable=True),
     sa.Column('caption', sa.String(), nullable=True),
-    sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
-    sa.Column('updated_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
+    sa.Column(
+        'created_at',
+        sa.DateTime(timezone=True),
+        server_default=sa.text('now()'),
+        nullable=False,
+    ),
+    sa.Column(
+        'updated_at',
+        sa.DateTime(timezone=True),
+        server_default=sa.text('now()'),
+        nullable=False,
+    ),
     sa.ForeignKeyConstraint(['vendor_service_id'], ['vendor_services.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -75,8 +115,18 @@ def upgrade() -> None:
     sa.Column('response', sa.String(), nullable=True),
     sa.Column('plus_ones', sa.Integer(), nullable=True),
     sa.Column('notes', sa.String(), nullable=True),
-    sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
-    sa.Column('updated_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
+    sa.Column(
+        'created_at',
+        sa.DateTime(timezone=True),
+        server_default=sa.text('now()'),
+        nullable=False,
+    ),
+    sa.Column(
+        'updated_at',
+        sa.DateTime(timezone=True),
+        server_default=sa.text('now()'),
+        nullable=False,
+    ),
     sa.ForeignKeyConstraint(['event_id'], ['events.id'], ),
     sa.ForeignKeyConstraint(['guest_id'], ['guests.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -86,8 +136,18 @@ def upgrade() -> None:
     sa.Column('event_id', sa.UUID(), nullable=False),
     sa.Column('name', sa.String(), nullable=False),
     sa.Column('capacity', sa.Integer(), nullable=True),
-    sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
-    sa.Column('updated_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
+    sa.Column(
+        'created_at',
+        sa.DateTime(timezone=True),
+        server_default=sa.text('now()'),
+        nullable=False,
+    ),
+    sa.Column(
+        'updated_at',
+        sa.DateTime(timezone=True),
+        server_default=sa.text('now()'),
+        nullable=False,
+    ),
     sa.ForeignKeyConstraint(['event_id'], ['events.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -97,8 +157,18 @@ def upgrade() -> None:
     sa.Column('vendor_id', sa.UUID(), nullable=False),
     sa.Column('message', sa.String(), nullable=True),
     sa.Column('status', sa.String(), nullable=True),
-    sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
-    sa.Column('updated_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
+    sa.Column(
+        'created_at',
+        sa.DateTime(timezone=True),
+        server_default=sa.text('now()'),
+        nullable=False,
+    ),
+    sa.Column(
+        'updated_at',
+        sa.DateTime(timezone=True),
+        server_default=sa.text('now()'),
+        nullable=False,
+    ),
     sa.ForeignKeyConstraint(['event_id'], ['events.id'], ),
     sa.ForeignKeyConstraint(['vendor_id'], ['vendors.id'], ),
     sa.PrimaryKeyConstraint('id')
@@ -107,8 +177,18 @@ def upgrade() -> None:
     sa.Column('id', sa.UUID(), nullable=False),
     sa.Column('seating_table_id', sa.UUID(), nullable=False),
     sa.Column('guest_id', sa.UUID(), nullable=False),
-    sa.Column('created_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
-    sa.Column('updated_at', sa.DateTime(timezone=True), server_default=sa.text('now()'), nullable=False),
+    sa.Column(
+        'created_at',
+        sa.DateTime(timezone=True),
+        server_default=sa.text('now()'),
+        nullable=False,
+    ),
+    sa.Column(
+        'updated_at',
+        sa.DateTime(timezone=True),
+        server_default=sa.text('now()'),
+        nullable=False,
+    ),
     sa.ForeignKeyConstraint(['guest_id'], ['guests.id'], ),
     sa.ForeignKeyConstraint(['seating_table_id'], ['seating_tables.id'], ),
     sa.PrimaryKeyConstraint('id')

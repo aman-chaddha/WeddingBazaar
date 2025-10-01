@@ -1,10 +1,11 @@
 import uuid
-from sqlalchemy import Column, String, ForeignKey, Numeric, Integer
+
+from sqlalchemy import Column, ForeignKey, Integer, Numeric, String
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 
 from .base import Base, TimestampMixin
-from .common_enums import PackageStatus, ItemStatus
+from .common_enums import ItemStatus, PackageStatus
 
 
 class Package(Base, TimestampMixin):
@@ -18,7 +19,11 @@ class Package(Base, TimestampMixin):
     estimated_total = Column(Numeric, nullable=True)
 
     couple = relationship("Couple", back_populates="packages")
-    items = relationship("PackageItem", back_populates="package", cascade="all, delete-orphan")
+    items = relationship(
+        "PackageItem",
+        back_populates="package",
+        cascade="all, delete-orphan",
+    )
 
 
 class PackageItem(Base, TimestampMixin):
@@ -35,7 +40,11 @@ class PackageItem(Base, TimestampMixin):
     status = Column(ItemStatus, nullable=False, default="suggested")
 
     package = relationship("Package", back_populates="items")
-    shortlists = relationship("VendorShortlist", back_populates="package_item", cascade="all, delete-orphan")
+    shortlists = relationship(
+        "VendorShortlist",
+        back_populates="package_item",
+        cascade="all, delete-orphan",
+    )
 
 
 class VendorShortlist(Base, TimestampMixin):

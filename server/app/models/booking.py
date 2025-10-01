@@ -1,10 +1,11 @@
 import uuid
-from sqlalchemy import Column, String, ForeignKey, Numeric, Date, Boolean
+
+from sqlalchemy import Boolean, Column, Date, ForeignKey, Numeric, String
 from sqlalchemy.dialects.postgresql import UUID
 from sqlalchemy.orm import relationship
 
 from .base import Base, TimestampMixin
-from .common_enums import BookingStatus, PaymentStatus, PaymentMethod
+from .common_enums import BookingStatus, PaymentMethod, PaymentStatus
 
 
 class Booking(Base, TimestampMixin):
@@ -19,8 +20,16 @@ class Booking(Base, TimestampMixin):
     venue_address = Column(String, nullable=True)
     total_amount = Column(Numeric, nullable=True)
 
-    payments = relationship("Payment", back_populates="booking", cascade="all, delete-orphan")
-    events = relationship("Event", back_populates="booking", cascade="all, delete-orphan")
+    payments = relationship(
+        "Payment",
+        back_populates="booking",
+        cascade="all, delete-orphan"
+    )
+    events = relationship(
+        "Event",
+        back_populates="booking",
+        cascade="all, delete-orphan"
+    )
 
 
 class Payment(Base, TimestampMixin):
@@ -36,7 +45,11 @@ class Payment(Base, TimestampMixin):
     stripe_payment_intent_id = Column(String, nullable=True)
 
     booking = relationship("Booking", back_populates="payments")
-    transactions = relationship("PaymentTransaction", back_populates="payment", cascade="all, delete-orphan")
+    transactions = relationship(
+        "PaymentTransaction",
+        back_populates="payment",
+        cascade="all, delete-orphan"
+    )
 
 
 class PaymentTransaction(Base, TimestampMixin):

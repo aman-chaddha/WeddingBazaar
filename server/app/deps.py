@@ -1,11 +1,12 @@
+from uuid import UUID
+
 from fastapi import Depends, HTTPException, status
 from fastapi.security import OAuth2PasswordBearer
 from sqlalchemy.orm import Session
-from uuid import UUID
 
 from .core.security import decode_token
-from .db.session import get_db
 from .crud.user import get_user_by_email
+from .db.session import get_db
 from .models.user import User
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login")
@@ -27,5 +28,8 @@ def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(
         user = db.query(User).filter(User.id == uid).first()
 
     if not user or not user.is_active:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Inactive or not found user")
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Inactive or not found user"
+        )
     return user

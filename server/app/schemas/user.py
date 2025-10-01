@@ -1,13 +1,14 @@
 from typing import Optional
-from pydantic import BaseModel, EmailStr
 from uuid import UUID
+
+from pydantic import BaseModel, EmailStr
 
 
 class UserBase(BaseModel):
     email: EmailStr
-    first_name: Optional[str] = None
-    last_name: Optional[str] = None
-    phone: Optional[str] = None
+    first_name: str | None = None
+    last_name: str | None = None
+    phone: str | None = None
     role: str = "couple"
 
 
@@ -16,9 +17,9 @@ class UserCreate(UserBase):
 
 
 class UserUpdate(BaseModel):
-    first_name: Optional[str] = None
-    last_name: Optional[str] = None
-    phone: Optional[str] = None
+    first_name: str | None = None
+    last_name: str | None = None
+    phone: str | None = None
 
 
 class UserOut(UserBase):

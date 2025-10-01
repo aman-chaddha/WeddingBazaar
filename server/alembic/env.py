@@ -1,9 +1,9 @@
-import sys
 import os
+import sys
 from logging.config import fileConfig
-from sqlalchemy import engine_from_config
-from sqlalchemy import pool
+
 from alembic import context
+from sqlalchemy import engine_from_config, pool
 
 # this is the Alembic Config object, which provides
 # access to the values within the .ini file in use.
@@ -25,7 +25,7 @@ try:
     from app.core.config import settings
     from app.db.base import Base  # Base with models imported in app/db/base.py
 except Exception as e:
-    raise RuntimeError(f"Failed to import app settings or models: {e}")
+    raise RuntimeError(f"Failed to import app settings or models: {e}") from e
 
 # set the SQLAlchemy URL from our settings (.env)
 config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)

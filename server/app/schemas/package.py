@@ -1,10 +1,10 @@
-from typing import Optional, List
-from pydantic import BaseModel
 from uuid import UUID
+
+from pydantic import BaseModel
 
 
 class PackageBase(BaseModel):
-    title: Optional[str] = None
+    title: str | None = None
 
 
 class PackageCreate(PackageBase):
@@ -16,7 +16,7 @@ class PackageOut(PackageBase):
     couple_id: UUID
     status: str
     iteration_count: int
-    estimated_total: Optional[float] = None
+    estimated_total: float | None = None
 
     class Config:
         from_attributes = True

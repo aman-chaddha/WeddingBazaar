@@ -5,17 +5,17 @@ Revises: 4339a3ffd714
 Create Date: 2025-10-01 02:16:07.237479
 
 """
-from typing import Sequence, Union
+from collections.abc import Sequence
+from typing import Union
 
-from alembic import op
 import sqlalchemy as sa
-
+from alembic import op
 
 # revision identifiers, used by Alembic.
 revision: str = '733ea45c5a03'
-down_revision: Union[str, Sequence[str], None] = '4339a3ffd714'
-branch_labels: Union[str, Sequence[str], None] = None
-depends_on: Union[str, Sequence[str], None] = None
+down_revision: str | Sequence[str] | None = '4339a3ffd714'
+branch_labels: str | Sequence[str] | None = None
+depends_on: str | Sequence[str] | None = None
 
 
 def upgrade() -> None:
@@ -43,5 +43,18 @@ def upgrade() -> None:
 def downgrade() -> None:
     """Remove seeded categories."""
     conn = op.get_bind()
-    conn.execute(sa.text("DELETE FROM service_categories WHERE name IN (:names)"),
-                 {"names": ("venue","photography","dj","makeup","catering","decor","transport","other")})
+    conn.execute(
+        sa.text("DELETE FROM service_categories WHERE name IN (:names)"),
+        {
+            "names": (
+                "venue",
+                "photography",
+                "dj",
+                "makeup",
+                "catering",
+                "decor",
+                "transport",
+                "other",
+            )
+        },
+    )
