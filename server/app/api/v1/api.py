@@ -1,7 +1,7 @@
 from fastapi import APIRouter
 
 from .endpoints import health, auth
-from .endpoints import users, couples
+from .endpoints import users, couples, vendors, vendor_services, packages
 
 api_router = APIRouter()
 
@@ -16,3 +16,10 @@ api_router.include_router(users.router, prefix="/users", tags=["users"])
 
 # Couples
 api_router.include_router(couples.router, prefix="/couples", tags=["couples"]) 
+
+# Vendors & Services
+api_router.include_router(vendors.router, prefix="/vendors", tags=["vendors"]) 
+api_router.include_router(vendor_services.router, prefix="/vendor-services", tags=["vendor-services"]) 
+
+# Packages
+api_router.include_router(packages.router, prefix="/packages", tags=["packages"]) 

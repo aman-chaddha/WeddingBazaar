@@ -10,3 +10,10 @@ from ..models import package  # noqa: F401
 from ..models import booking  # noqa: F401
 from ..models import event  # noqa: F401
 from ..models import service_category  # noqa: F401
+from ..models import family_member  # noqa: F401
+from ..models import service_media  # noqa: F401
+from ..models import vendor_status_update  # noqa: F401
+from ..models import guest  # noqa: F401
+from ..models import rsvp  # noqa: F401
+from ..models import seating  # noqa: F401
+from ..models import accommodation  # noqa: F401
